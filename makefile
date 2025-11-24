@@ -15,6 +15,15 @@ composer-install:
 composer-update:
 	$(composerCommand) update
 
+curl-post:
+	curl -X POST -H "Content-Type: application/json" -d '{"countryCode": "ru"}' http://localhost:8088/v1/statistics
+
+curl-error:
+	curl -X POST -H "Content-Type: application/json" -d '{"countryCode": "wrongCountry"}' http://localhost:8088/v1/statistics
+
+curl-get:
+	curl -H "Content-Type: application/json" http://localhost:8088/v1/statistics
+
 unit-test:
 	docker run --rm \
     	--volume $(CURDIR):/app \
@@ -33,3 +42,10 @@ load-test-post: wrk-pull
 
 load-test-get: wrk-pull
 	$(wrkCommand) $(baseUrl)
+
+archive:
+	git archive --format=zip --output="archive.zip" HEAD
+
+unarchive:
+	unzip -o archive.zip
+	

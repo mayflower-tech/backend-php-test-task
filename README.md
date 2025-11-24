@@ -22,6 +22,17 @@ Response:
 201 Created
 ```
 
+Wrong country code example:
+```bash
+curl -X POST http://127.0.0.1:8088/v1/statistics \
+     -H "Content-Type: application/json" \
+     -d '{"countryCode": "wrongCountry"}'
+```
+Response:
+```
+201 Created
+```
+
 ### Get Country Statistics
 
 ```bash
